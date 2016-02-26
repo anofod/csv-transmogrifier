@@ -5,14 +5,17 @@
 // Based on: http://stackoverflow.com/questions/31375531/how-to-use-promises-with-papaparse
 Papa.parsePromise = function(file) {
     return new Promise(function(resolve, reject) {
-        Papa.parse(file, 
-            { 
+        Papa.parse(file,
+            {
                 complete: resolve,
                 error: reject,
             }
         );
     });
 };
+
+var data;
+var fields;
 
 $(document).ready(function () {
     $('#file-upload').on('change', function(e) {
@@ -26,23 +29,52 @@ $(document).ready(function () {
 
                 let headerData = results.data.shift();
 
+                // Set globals
+                data = results.data;
+                fields = headerData;
+
+                let table = $( $('#table-template').html() );
+
                 // Set column titles
+                let row = $('<tr></tr>');
                 headerData.forEach(function(result) {
-                    $('#data-table thead tr').append('<th>' + result + '</th>');
+                    $(row).append('<th contentEditable="true">' + result + '</th>');
                 });
+                $('thead', table).append(row);
 
                 // Set row data
                 results.data.forEach(function(rowData) {
-
-                    $('#data-table tbody').append('<tr>');
+                    let row = $('<tr></tr>');
 
                     rowData.forEach(function(rowItem) {
-                        $('#data-table tbody').append('<td>' + rowItem + '</td>');
+                        $(row).append('<td>' + rowItem + '</td>');
                     });
-                    
-                    $('#data-table tbody').append('</tr>');
+
+                    $('tbody', table).append(row);
                 });
-            })
-            ;
+
+                // Display table and download link
+                $('#csv-data').html(table);
+                $('.download').show();
+
+            });
+    });
+
+    // Download
+    $('.download').on('click', function (e) {
+
+        // Get new fields from table
+        let newFields = [];
+        $('th').each(function () {
+            let field = $(this).text();
+            newFields.push(field);
+        });
+        data.unshift(newFields);
+
+        // Convert to CSV
+        let csv = Papa.unparse(data);
+
+        // Download as CSV
+        window.open('data:text/csv,' + encodeURIComponent(csv));
     });
 });

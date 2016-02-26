@@ -1,4 +1,54 @@
 body {
-    padding-top: 5rem;
+    padding: 5rem 0 0 0;
     background-color: #E7E7E7;
+}
+.hidden {
+    display: none;
+}
+.btn-container {
+    padding: 0px;
+}
+.file-btn {
+    padding: 0;
+}
+#file-upload {
+    opacity: 0;
+    width: 400px;
+    margin-left: -200px;
+    height: 2.375rem;
+    padding: .375rem 1rem;
+    cursor: pointer;
+}
+#file-download-btn-text {
+    margin-bottom: -2.375rem;
+    width: 200px;
+    height: 2.375rem;
+    display: block;
+    padding: .375rem 1rem;
+    cursor: pointer;
+}
+.row {
+    margin: .9375rem 0;
+}
+.table {
+    background-color: #FFFFFF;
+    font-size: .8em;
+    padding-top: 3px;
+}
+.table th {
+    background-color: #444;
+    color: #FFF;
+    padding: 3px 10px;
+}
+.table tbody {
+    font-size: .8em;
+}
+button.download {
+    float: right;
+}
+[contenteditable="true"]:focus{
+    outline:none;
+}
+#filename {
+    text-align: center;
 }

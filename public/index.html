@@ -33,29 +33,32 @@
             </ul>
         </nav>
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
-                    <input id="file-upload" class="btn btn-primary" type="file">
+                <div class="col-md-3 file-upload btn-container">
+                    <button class="btn btn-primary file-btn">
+                        <span id="file-download-btn-text">Select CSV File</span>
+                        <input id="file-upload" type="file">
+                    </button>
                 </div>
                 <div class="col-md-6">
                     <h2 id="filename"></h2>
                 </div>
+                <div class="col-md-3 btn-container">
+                    <button class="btn btn-secondary download hidden">Save New CSV File</button>
+                </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <table id="data-table" class="table">
-                        <thead>
-                            <tr>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
+                <div id="csv-data"></div>
             </div>
         </div><!-- /.container -->
 
+        <script id="table-template" type="text/html">
+            <table id="data-table" class="table table-bordered table-striped table-sm">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </script>
 
         <!-- JavaScript
         ================================================== -->
